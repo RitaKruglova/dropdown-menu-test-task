@@ -1,0 +1,42 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "react-app",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["@typescript-eslint", "prettier"],
+  "rules": {
+    "prettier/prettier": ["error", {
+      "endOfLine": "auto",
+      "singleQuote": true,
+      "tabWidth": 2,
+      "trailingComma": "all",
+      "printWidth": 80,
+      "semi": true,
+      "bracketSpacing": true,
+      "jsxBracketSameLine": false,
+      "arrowParens": "avoid"
+    }],
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "indent": ["error", 2],
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  }
+}
