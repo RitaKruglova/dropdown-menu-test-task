@@ -1,7 +1,15 @@
 import { FC } from 'react';
+import appStyles from './app.module.css';
+import MoreButton from '../more-button/more-button';
 
 const App: FC = () => {
-  return <h1>Dropdown Menu</h1>;
+  return (
+    <div className={appStyles.container}>
+      <MoreButton />
+      <MoreButton />
+      <MoreButton />
+    </div>
+  );
 };
 
 export default App;
