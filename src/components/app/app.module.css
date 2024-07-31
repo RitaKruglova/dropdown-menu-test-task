@@ -1,0 +1,10 @@
+.container {
+  height: 300vh;
+  background-color: #f0f0f0;
+}
+
+.buttons {
+  padding-top: 200px;
+  display: flex;
+  justify-content: space-between;
+}
