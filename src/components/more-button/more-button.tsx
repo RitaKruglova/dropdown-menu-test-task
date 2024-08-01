@@ -3,7 +3,7 @@ import moreButtonStyles from './more-button.module.css';
 import moreIconPath from '../../images/more.svg';
 
 interface IMoreButtonProps {
-  handleClick: () => void;
+  handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const MoreButton: FC<IMoreButtonProps> = ({ handleClick }) => {
