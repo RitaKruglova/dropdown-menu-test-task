@@ -6,6 +6,7 @@ import MenuItem from '../menu-item/menu-item';
 import shareIconPath from '../../images/share.svg';
 import editIconPath from '../../images/edit.svg';
 import trashIconPath from '../../images/trash.svg';
+import { buttonDeleteText, buttonEditText, buttonShareText } from '../../utils/constants';
 
 const App: FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -28,19 +29,19 @@ const App: FC = () => {
       {isMenuOpen &&
         <DropdownMenu>
           <MenuItem
-            text="Поделиться в социальных сетях"
+            text={buttonShareText}
             iconPath={shareIconPath}
-            alt="Поделиться"
+            alt={buttonShareText}
           />
           <MenuItem
-            text="Редактировать страницу"
+            text={buttonEditText}
             iconPath={editIconPath}
-            alt="Редактировать"
+            alt={buttonEditText}
           />
           <MenuItem
-            text="Удалить страницу"
+            text={buttonDeleteText}
             iconPath={trashIconPath}
-            alt="Удалить"
+            alt={buttonDeleteText}
           />
         </DropdownMenu>
       }

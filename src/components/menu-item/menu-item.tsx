@@ -9,10 +9,14 @@ interface IMenuItemProps {
 
 const MenuItem: FC<IMenuItemProps> = ({ text, iconPath, alt }) => {
   return (
-    <div className={menuItemStyles.container}>
+    <button
+      className={menuItemStyles.container}
+      type="button"
+      aria-label={alt}
+    >
       <p className={menuItemStyles.text}>{text}</p>
       <img className={menuItemStyles.icon} src={iconPath} alt={alt} />
-    </div>
+    </button>
   );
 };
 
