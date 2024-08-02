@@ -13,6 +13,7 @@ const App: FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [menuPosition, setMenuPosition] = useState<TMenuPosition>({top: 0, left: 0});
   const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   function handleClick(event: React.MouseEvent<HTMLButtonElement>): void {
     if (menuRef.current === null) {
@@ -21,24 +22,22 @@ const App: FC = () => {
 
     let left;
     let top;
-    if (window.innerWidth - event.clientX >= menuWidth) {
-      left = event.clientX;
+
+    const target = event.currentTarget as HTMLButtonElement;
+
+    if (document.documentElement.offsetWidth - target.offsetLeft >= menuWidth) {
+      left = target.offsetLeft;
     } else {
-      left = event.clientX - menuWidth;
+      left = target.offsetLeft + target.offsetWidth - menuWidth;
     }
 
-    if (window.innerHeight - event.clientY >= menuRef.current.offsetHeight) {
-      top = event.clientY;
+    if (document.documentElement.offsetHeight - target.offsetTop - target.offsetHeight >= menuRef.current.offsetHeight) {
+      top = target.offsetTop + target.offsetHeight;
     } else {
-      top = event.clientY - menuRef.current.offsetHeight;
+      top = target.offsetTop - menuRef.current.offsetHeight;
     }
     setMenuPosition({top: top, left: left});
-
-    if (isMenuOpen) {
-      setIsMenuOpen(false);
-    } else {
-      setIsMenuOpen(true);
-    }
+    setIsMenuOpen(true);
   }
 
   function showContextMenu(event: MouseEvent): void {
@@ -48,23 +47,25 @@ const App: FC = () => {
     }
     let left;
     let top;
-    if (window.innerWidth - event.clientX >= menuWidth) {
-      left = event.clientX;
+    if (document.documentElement.offsetWidth - event.pageX > menuWidth) {
+      left = event.pageX;
     } else {
-      left = event.clientX - menuWidth;
+      left = event.pageX - menuWidth;
     }
 
-    if (window.innerHeight - event.clientY >= menuRef.current.offsetHeight) {
-      top = event.clientY;
+    if (document.documentElement.offsetHeight - event.pageY > menuRef.current.offsetHeight) {
+      top = event.pageY;
     } else {
-      top = event.clientY - menuRef.current.offsetHeight;
+      top = event.pageY - menuRef.current.offsetHeight;
     }
     setMenuPosition({top: top, left: left});
+    console.log(top, left);
     setIsMenuOpen(true);
   }
 
   function hideMenu(event: MouseEvent): void {
-    if (event.target !== menuRef.current) {
+    if (menuRef.current && !menuRef.current.contains(event.target as Node) &&
+        buttonRefs.current.every(buttonRef => buttonRef && !buttonRef.contains(event.target as Node))) {
       setIsMenuOpen(false);
     }
   }
@@ -82,31 +83,35 @@ const App: FC = () => {
   return (
     <div className={appStyles.container}>
       <div className={appStyles.buttons}>
-        <MoreButton handleClick={handleClick} />
-        <MoreButton handleClick={handleClick} />
-        <MoreButton handleClick={handleClick} />
+        {[0, 1, 2].map((index) => (
+          <MoreButton
+            key={index}
+            ref={(el) => (buttonRefs.current[index] = el)}
+            handleClick={handleClick}
+          />
+        ))}
       </div>
       <DropdownMenu
         style={{visibility: isMenuOpen ? 'visible' : 'hidden'}}
         menuPosition={menuPosition}
         ref={menuRef}
       >
-          <MenuItem
-            text={buttonShareText}
-            iconPath={shareIconPath}
-            alt={buttonShareText}
-          />
-          <MenuItem
-            text={buttonEditText}
-            iconPath={editIconPath}
-            alt={buttonEditText}
-          />
-          <MenuItem
-            text={buttonDeleteText}
-            iconPath={trashIconPath}
-            alt={buttonDeleteText}
-          />
-        </DropdownMenu>
+        <MenuItem
+          text={buttonShareText}
+          iconPath={shareIconPath}
+          alt={buttonShareText}
+        />
+        <MenuItem
+          text={buttonEditText}
+          iconPath={editIconPath}
+          alt={buttonEditText}
+        />
+        <MenuItem
+          text={buttonDeleteText}
+          iconPath={trashIconPath}
+          alt={buttonDeleteText}
+        />
+      </DropdownMenu>
     </div>
   );
 };
