@@ -48,6 +48,7 @@ export default [
       "import/no-unresolved": "off",
       "import/prefer-default-export": "off",
       "no-unused-vars": "off",
+      "jsx-a11y/no-redundant-roles": "off",
       "react-hooks/exhaustive-deps": "error",
       "react-hooks/rules-of-hooks": "error",
       "react/require-default-props": "off",
