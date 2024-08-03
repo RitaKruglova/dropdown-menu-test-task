@@ -15,6 +15,7 @@ const App: FC = () => {
     top: 0,
     left: 0,
   });
+  const [currentButton, setCurrentButton] = useState<HTMLButtonElement | null>(null);
   const menuRef = useRef<HTMLUListElement>(null);
   const buttonRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
@@ -43,7 +44,12 @@ const App: FC = () => {
       top = target.offsetTop - menuRef.current.offsetHeight;
     }
     setMenuPosition({ top: top, left: left });
-    setIsMenuOpen(!isMenuOpen);
+    if (isMenuOpen && target === currentButton) {
+      setIsMenuOpen(false);
+    } else {
+      setIsMenuOpen(true);
+      setCurrentButton(target);
+    }
   }
 
   function showContextMenu(event: MouseEvent): void {
