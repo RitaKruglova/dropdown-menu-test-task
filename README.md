@@ -8,7 +8,7 @@ TypeScript, CSS, CSS Modules, React, Jest, Eslint, Prettier
 
 ## Установка и запуск
 
-Для начала убедитесь, что у вас установлены [Node.js](https://nodejs.org/en/) и npm.
+Для начала убедитесь, что у вас установлены [Node.js](https://nodejs.org/en/) и yarn.
 
 1. Клонируйте репозиторий:
 ```bash
