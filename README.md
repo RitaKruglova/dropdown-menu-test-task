@@ -17,10 +17,10 @@ cd dropdown-menu-test-task
 ```
 2. Установите зависимости:
 ```bash
-npm install
+yarn install
 ```
 3. Запустите разработческий сервер:
 ```bash
-npm run dev
+yarn start
 ```
 4. Теперь вы можете открыть http://localhost:3000 в вашем браузере и просмотреть приложение.
