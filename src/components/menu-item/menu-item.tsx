@@ -13,12 +13,7 @@ const MenuItem: FC<IMenuItemProps> = ({ text, iconPath, alt }) => {
   }
 
   return (
-    <li
-      className={menuItemStyles.container}
-      aria-label={alt}
-      onClick={handleClick}
-      role="menuitem"
-    >
+    <li className={menuItemStyles.container} aria-label={alt} onClick={handleClick} role="menuitem">
       <p className={menuItemStyles.text}>{text}</p>
       <img className={menuItemStyles.icon} src={iconPath} alt={alt} />
     </li>

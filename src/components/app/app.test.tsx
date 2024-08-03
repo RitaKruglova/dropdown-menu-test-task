@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import { fireEvent } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import App from './app';
 import { buttonShareText, buttonEditText, buttonDeleteText, menuWidth } from '../../utils/constants';
@@ -8,10 +9,10 @@ describe('App Component', () => {
   test('renders MoreButtons and handles click to show dropdown menu', () => {
     render(<App />);
     const buttons = screen.getAllByRole('button');
-    
+
     fireEvent.click(buttons[0]);
     const menuItems = screen.getAllByRole('menuitem');
-    
+
     expect(buttons).toHaveLength(3);
     expect(menuItems).toHaveLength(3);
     expect(menuItems[0]).toHaveTextContent(buttonShareText);
@@ -47,16 +48,40 @@ describe('App Component', () => {
   test('open menu in the left-bottom direction based on button position', () => {
     render(<App />);
     const button = screen.getAllByRole('button')[0];
-    Object.defineProperty(document.documentElement, 'offsetWidth', { configurable: true, value: 1000 });
-    Object.defineProperty(document.documentElement, 'clientHeight', { configurable: true, value: 1000 });
-    Object.defineProperty(button, 'offsetLeft', { configurable: true, value: 200 });
-    Object.defineProperty(button, 'offsetTop', { configurable: true, value: 200 });
-    Object.defineProperty(button, 'offsetWidth', { configurable: true, value: 50 });
-    Object.defineProperty(button, 'offsetHeight', { configurable: true, value: 50 });
+    Object.defineProperty(document.documentElement, 'offsetWidth', {
+      configurable: true,
+      value: 1000,
+    });
+    Object.defineProperty(document.documentElement, 'clientHeight', {
+      configurable: true,
+      value: 1000,
+    });
+    Object.defineProperty(button, 'offsetLeft', {
+      configurable: true,
+      value: 200,
+    });
+    Object.defineProperty(button, 'offsetTop', {
+      configurable: true,
+      value: 200,
+    });
+    Object.defineProperty(button, 'offsetWidth', {
+      configurable: true,
+      value: 50,
+    });
+    Object.defineProperty(button, 'offsetHeight', {
+      configurable: true,
+      value: 50,
+    });
     const menu = document.querySelector('ul[role="menu"]');
     if (menu) {
-      Object.defineProperty(menu, 'offsetHeight', { configurable: true, value: 100 });
-      Object.defineProperty(menu, 'offsetWidth', { configurable: true, value: menuWidth });
+      Object.defineProperty(menu, 'offsetHeight', {
+        configurable: true,
+        value: 100,
+      });
+      Object.defineProperty(menu, 'offsetWidth', {
+        configurable: true,
+        value: menuWidth,
+      });
     }
 
     fireEvent.click(button);
@@ -69,16 +94,40 @@ describe('App Component', () => {
   test('open menu in the right-bottom direction based on button position', () => {
     render(<App />);
     const button = screen.getAllByRole('button')[0];
-    Object.defineProperty(document.documentElement, 'offsetWidth', { configurable: true, value: 1000 });
-    Object.defineProperty(document.documentElement, 'clientHeight', { configurable: true, value: 1000 });
-    Object.defineProperty(button, 'offsetLeft', { configurable: true, value: 800 });
-    Object.defineProperty(button, 'offsetTop', { configurable: true, value: 200 });
-    Object.defineProperty(button, 'offsetWidth', { configurable: true, value: 50 });
-    Object.defineProperty(button, 'offsetHeight', { configurable: true, value: 50 });
+    Object.defineProperty(document.documentElement, 'offsetWidth', {
+      configurable: true,
+      value: 1000,
+    });
+    Object.defineProperty(document.documentElement, 'clientHeight', {
+      configurable: true,
+      value: 1000,
+    });
+    Object.defineProperty(button, 'offsetLeft', {
+      configurable: true,
+      value: 800,
+    });
+    Object.defineProperty(button, 'offsetTop', {
+      configurable: true,
+      value: 200,
+    });
+    Object.defineProperty(button, 'offsetWidth', {
+      configurable: true,
+      value: 50,
+    });
+    Object.defineProperty(button, 'offsetHeight', {
+      configurable: true,
+      value: 50,
+    });
     const menu = document.querySelector('ul[role="menu"]');
     if (menu) {
-      Object.defineProperty(menu, 'offsetHeight', { configurable: true, value: 100 });
-      Object.defineProperty(menu, 'offsetWidth', { configurable: true, value: menuWidth });
+      Object.defineProperty(menu, 'offsetHeight', {
+        configurable: true,
+        value: 100,
+      });
+      Object.defineProperty(menu, 'offsetWidth', {
+        configurable: true,
+        value: menuWidth,
+      });
     }
 
     fireEvent.click(button);
@@ -91,16 +140,40 @@ describe('App Component', () => {
   test('open menu in the right-top direction based on button position', () => {
     render(<App />);
     const button = screen.getAllByRole('button')[0];
-    Object.defineProperty(document.documentElement, 'offsetWidth', { configurable: true, value: 1000 });
-    Object.defineProperty(document.documentElement, 'clientHeight', { configurable: true, value: 1000 });
-    Object.defineProperty(button, 'offsetLeft', { configurable: true, value: 200 });
-    Object.defineProperty(button, 'offsetTop', { configurable: true, value: 920 });
-    Object.defineProperty(button, 'offsetWidth', { configurable: true, value: 50 });
-    Object.defineProperty(button, 'offsetHeight', { configurable: true, value: 50 });
+    Object.defineProperty(document.documentElement, 'offsetWidth', {
+      configurable: true,
+      value: 1000,
+    });
+    Object.defineProperty(document.documentElement, 'clientHeight', {
+      configurable: true,
+      value: 1000,
+    });
+    Object.defineProperty(button, 'offsetLeft', {
+      configurable: true,
+      value: 200,
+    });
+    Object.defineProperty(button, 'offsetTop', {
+      configurable: true,
+      value: 920,
+    });
+    Object.defineProperty(button, 'offsetWidth', {
+      configurable: true,
+      value: 50,
+    });
+    Object.defineProperty(button, 'offsetHeight', {
+      configurable: true,
+      value: 50,
+    });
     const menu = document.querySelector('ul[role="menu"]');
     if (menu) {
-      Object.defineProperty(menu, 'offsetHeight', { configurable: true, value: 100 });
-      Object.defineProperty(menu, 'offsetWidth', { configurable: true, value: menuWidth });
+      Object.defineProperty(menu, 'offsetHeight', {
+        configurable: true,
+        value: 100,
+      });
+      Object.defineProperty(menu, 'offsetWidth', {
+        configurable: true,
+        value: menuWidth,
+      });
     }
 
     fireEvent.click(button);
@@ -113,16 +186,40 @@ describe('App Component', () => {
   test('open menu in the left-top direction based on button position', () => {
     render(<App />);
     const button = screen.getAllByRole('button')[0];
-    Object.defineProperty(document.documentElement, 'offsetWidth', { configurable: true, value: 1000 });
-    Object.defineProperty(document.documentElement, 'clientHeight', { configurable: true, value: 1000 });
-    Object.defineProperty(button, 'offsetLeft', { configurable: true, value: 800 });
-    Object.defineProperty(button, 'offsetTop', { configurable: true, value: 900 });
-    Object.defineProperty(button, 'offsetWidth', { configurable: true, value: 50 });
-    Object.defineProperty(button, 'offsetHeight', { configurable: true, value: 50 });
+    Object.defineProperty(document.documentElement, 'offsetWidth', {
+      configurable: true,
+      value: 1000,
+    });
+    Object.defineProperty(document.documentElement, 'clientHeight', {
+      configurable: true,
+      value: 1000,
+    });
+    Object.defineProperty(button, 'offsetLeft', {
+      configurable: true,
+      value: 800,
+    });
+    Object.defineProperty(button, 'offsetTop', {
+      configurable: true,
+      value: 900,
+    });
+    Object.defineProperty(button, 'offsetWidth', {
+      configurable: true,
+      value: 50,
+    });
+    Object.defineProperty(button, 'offsetHeight', {
+      configurable: true,
+      value: 50,
+    });
     const menu = document.querySelector('ul[role="menu"]');
     if (menu) {
-      Object.defineProperty(menu, 'offsetHeight', { configurable: true, value: 100 });
-      Object.defineProperty(menu, 'offsetWidth', { configurable: true, value: menuWidth });
+      Object.defineProperty(menu, 'offsetHeight', {
+        configurable: true,
+        value: 100,
+      });
+      Object.defineProperty(menu, 'offsetWidth', {
+        configurable: true,
+        value: menuWidth,
+      });
     }
 
     fireEvent.click(button);

@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import appStyles from './app.module.css';
 import MoreButton from '../more-button/more-button';
 import DropdownMenu from '../dropdown-menu/dropdown-menu';
@@ -11,7 +11,10 @@ import { TMenuPosition } from '../../utils/types';
 
 const App: FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const [menuPosition, setMenuPosition] = useState<TMenuPosition>({top: 0, left: 0});
+  const [menuPosition, setMenuPosition] = useState<TMenuPosition>({
+    top: 0,
+    left: 0,
+  });
   const menuRef = useRef<HTMLUListElement>(null);
   const buttonRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
@@ -31,12 +34,15 @@ const App: FC = () => {
       left = target.offsetLeft + target.offsetWidth - menuWidth;
     }
 
-    if (document.documentElement.clientHeight - target.offsetTop - target.offsetHeight >= menuRef.current.offsetHeight + pagePadding) {
+    if (
+      document.documentElement.clientHeight - target.offsetTop - target.offsetHeight >=
+      menuRef.current.offsetHeight + pagePadding
+    ) {
       top = target.offsetTop + target.offsetHeight;
     } else {
       top = target.offsetTop - menuRef.current.offsetHeight;
     }
-    setMenuPosition({top: top, left: left});
+    setMenuPosition({ top: top, left: left });
     setIsMenuOpen(true);
   }
 
@@ -59,13 +65,16 @@ const App: FC = () => {
       top = event.pageY - menuRef.current.offsetHeight;
     }
 
-    setMenuPosition({top: top, left: left});
+    setMenuPosition({ top: top, left: left });
     setIsMenuOpen(true);
   }
 
   function hideMenu(event: MouseEvent): void {
-    if (menuRef.current && !menuRef.current.contains(event.target as Node) &&
-        buttonRefs.current.every(buttonRef => buttonRef && !buttonRef.contains(event.target as Node))) {
+    if (
+      menuRef.current &&
+      !menuRef.current.contains(event.target as Node) &&
+      buttonRefs.current.every(buttonRef => buttonRef && !buttonRef.contains(event.target as Node))
+    ) {
       setIsMenuOpen(false);
     }
   }
@@ -77,40 +86,20 @@ const App: FC = () => {
     return () => {
       document.removeEventListener('contextmenu', showContextMenu);
       document.removeEventListener('click', hideMenu);
-    }
+    };
   }, []);
 
   return (
     <div className={appStyles.container}>
       <div className={appStyles.buttons}>
-        {[0, 1, 2].map((index) => (
-          <MoreButton
-            key={index}
-            ref={(el) => (buttonRefs.current[index] = el)}
-            handleClick={handleClick}
-          />
+        {[0, 1, 2].map(index => (
+          <MoreButton key={index} ref={el => (buttonRefs.current[index] = el)} handleClick={handleClick} />
         ))}
       </div>
-      <DropdownMenu
-        style={{visibility: isMenuOpen ? 'visible' : 'hidden'}}
-        menuPosition={menuPosition}
-        ref={menuRef}
-      >
-        <MenuItem
-          text={buttonShareText}
-          iconPath={shareIconPath}
-          alt={buttonShareText}
-        />
-        <MenuItem
-          text={buttonEditText}
-          iconPath={editIconPath}
-          alt={buttonEditText}
-        />
-        <MenuItem
-          text={buttonDeleteText}
-          iconPath={trashIconPath}
-          alt={buttonDeleteText}
-        />
+      <DropdownMenu style={{ visibility: isMenuOpen ? 'visible' : 'hidden' }} menuPosition={menuPosition} ref={menuRef}>
+        <MenuItem text={buttonShareText} iconPath={shareIconPath} alt={buttonShareText} />
+        <MenuItem text={buttonEditText} iconPath={editIconPath} alt={buttonEditText} />
+        <MenuItem text={buttonDeleteText} iconPath={trashIconPath} alt={buttonDeleteText} />
       </DropdownMenu>
     </div>
   );

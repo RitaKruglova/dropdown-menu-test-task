@@ -1,5 +1,5 @@
-export const buttonShareText: string = 'Поделиться в социальных сетях';
-export const buttonEditText: string = 'Редактировать страницу';
-export const buttonDeleteText: string = 'Удалить страницу';
-export const menuWidth: number = 260;
-export const pagePadding: number = 20;
+export const buttonShareText = 'Поделиться в социальных сетях';
+export const buttonEditText = 'Редактировать страницу';
+export const buttonDeleteText = 'Удалить страницу';
+export const menuWidth = 260;
+export const pagePadding = 20;
