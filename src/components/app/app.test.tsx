@@ -6,7 +6,7 @@ import App from './app';
 import { buttonShareText, buttonEditText, buttonDeleteText, menuWidth } from '../../utils/constants';
 
 describe('App Component', () => {
-  test('renders MoreButtons and handles click to show dropdown menu', () => {
+  test('render MoreButtons and handles click to show dropdown menu', () => {
     render(<App />);
     const buttons = screen.getAllByRole('button');
 
@@ -20,7 +20,7 @@ describe('App Component', () => {
     expect(menuItems[2]).toHaveTextContent(buttonDeleteText);
   });
 
-  test('shows context menu on right click', () => {
+  test('show context menu on right click', () => {
     render(<App />);
 
     fireEvent.contextMenu(document);
@@ -32,7 +32,7 @@ describe('App Component', () => {
     expect(menuItems[2]).toHaveTextContent(buttonDeleteText);
   });
 
-  test('hides menu on clicking outside', () => {
+  test('hide menu on clicking outside', () => {
     render(<App />);
     const buttons = screen.getAllByRole('button');
 

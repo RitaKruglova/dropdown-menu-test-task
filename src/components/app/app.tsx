@@ -43,7 +43,7 @@ const App: FC = () => {
       top = target.offsetTop - menuRef.current.offsetHeight;
     }
     setMenuPosition({ top: top, left: left });
-    setIsMenuOpen(true);
+    setIsMenuOpen(!isMenuOpen);
   }
 
   function showContextMenu(event: MouseEvent): void {
