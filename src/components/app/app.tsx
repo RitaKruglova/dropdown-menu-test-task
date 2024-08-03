@@ -6,13 +6,13 @@ import MenuItem from '../menu-item/menu-item';
 import shareIconPath from '../../images/share.svg';
 import editIconPath from '../../images/edit.svg';
 import trashIconPath from '../../images/trash.svg';
-import { buttonDeleteText, buttonEditText, buttonShareText, menuWidth } from '../../utils/constants';
+import { buttonDeleteText, buttonEditText, buttonShareText, menuWidth, pagePadding } from '../../utils/constants';
 import { TMenuPosition } from '../../utils/types';
 
 const App: FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [menuPosition, setMenuPosition] = useState<TMenuPosition>({top: 0, left: 0});
-  const menuRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLUListElement>(null);
   const buttonRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   function handleClick(event: React.MouseEvent<HTMLButtonElement>): void {
@@ -25,13 +25,13 @@ const App: FC = () => {
 
     const target = event.currentTarget as HTMLButtonElement;
 
-    if (document.documentElement.offsetWidth - target.offsetLeft >= menuWidth) {
+    if (document.documentElement.offsetWidth - target.offsetLeft >= menuWidth + pagePadding) {
       left = target.offsetLeft;
     } else {
       left = target.offsetLeft + target.offsetWidth - menuWidth;
     }
 
-    if (document.documentElement.offsetHeight - target.offsetTop - target.offsetHeight >= menuRef.current.offsetHeight) {
+    if (document.documentElement.clientHeight - target.offsetTop - target.offsetHeight >= menuRef.current.offsetHeight + pagePadding) {
       top = target.offsetTop + target.offsetHeight;
     } else {
       top = target.offsetTop - menuRef.current.offsetHeight;
@@ -47,19 +47,19 @@ const App: FC = () => {
     }
     let left;
     let top;
-    if (document.documentElement.offsetWidth - event.pageX > menuWidth) {
+    if (document.documentElement.offsetWidth - event.pageX > menuWidth + pagePadding) {
       left = event.pageX;
     } else {
       left = event.pageX - menuWidth;
     }
 
-    if (document.documentElement.offsetHeight - event.pageY > menuRef.current.offsetHeight) {
+    if (document.documentElement.clientHeight - event.clientY > menuRef.current.offsetHeight + pagePadding) {
       top = event.pageY;
     } else {
       top = event.pageY - menuRef.current.offsetHeight;
     }
+
     setMenuPosition({top: top, left: left});
-    console.log(top, left);
     setIsMenuOpen(true);
   }
 

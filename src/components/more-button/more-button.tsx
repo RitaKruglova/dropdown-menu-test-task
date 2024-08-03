@@ -15,6 +15,7 @@ const MoreButton = forwardRef<HTMLButtonElement, IMoreButtonProps>(
         aria-label="Открыть меню"
         onClick={handleClick}
         ref={ref}
+        role="button"
       >
         <img className={moreButtonStyles.icon} src={moreIconPath} alt="Открыть меню" />
       </button>

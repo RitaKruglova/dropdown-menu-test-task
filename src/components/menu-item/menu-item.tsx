@@ -8,15 +8,20 @@ interface IMenuItemProps {
 }
 
 const MenuItem: FC<IMenuItemProps> = ({ text, iconPath, alt }) => {
+  function handleClick(): void {
+    console.log(`Нажата кнопка "${text}"`);
+  }
+
   return (
-    <button
+    <li
       className={menuItemStyles.container}
-      type="button"
       aria-label={alt}
+      onClick={handleClick}
+      role="menuitem"
     >
       <p className={menuItemStyles.text}>{text}</p>
       <img className={menuItemStyles.icon} src={iconPath} alt={alt} />
-    </button>
+    </li>
   );
 };
 

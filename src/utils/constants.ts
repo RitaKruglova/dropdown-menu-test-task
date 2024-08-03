@@ -2,3 +2,4 @@ export const buttonShareText: string = 'Поделиться в социальн
 export const buttonEditText: string = 'Редактировать страницу';
 export const buttonDeleteText: string = 'Удалить страницу';
 export const menuWidth: number = 260;
+export const pagePadding: number = 20;

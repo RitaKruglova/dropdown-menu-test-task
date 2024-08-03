@@ -4,20 +4,21 @@ import { TMenuPosition } from '../../utils/types';
 
 interface IDropdownMenuProps {
   children: ReactNode;
-  style: CSSProperties;
+  style?: CSSProperties;
   menuPosition: TMenuPosition;
 }
 
-const DropdownMenu = forwardRef<HTMLDivElement, IDropdownMenuProps>(
+const DropdownMenu = forwardRef<HTMLUListElement, IDropdownMenuProps>(
   ({ children, style, menuPosition }, ref) => {
     return (
-      <div
+      <ul
         ref={ref}
         className={dropdownMenuStyles.container}
         style={{...style, top: menuPosition.top, left: menuPosition.left}}
+        role="menu"
       >
         {children}
-      </div>
+      </ul>
     );
   }
 );
