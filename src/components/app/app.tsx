@@ -16,6 +16,7 @@ const App: FC = () => {
     left: 0,
   });
   const [currentButton, setCurrentButton] = useState<HTMLButtonElement | null>(null);
+  const [wasHide, setWasHide] = useState<boolean>(false);
   const menuRef = useRef<HTMLUListElement>(null);
   const buttonRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
@@ -46,6 +47,7 @@ const App: FC = () => {
     setMenuPosition({ top: top, left: left });
     if (isMenuOpen && target === currentButton) {
       setIsMenuOpen(false);
+      setWasHide(false);
     } else {
       setIsMenuOpen(true);
       setCurrentButton(target);
@@ -82,8 +84,39 @@ const App: FC = () => {
       buttonRefs.current.every(buttonRef => buttonRef && !buttonRef.contains(event.target as Node))
     ) {
       setIsMenuOpen(false);
+      setWasHide(false);
     }
   }
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (wasHide && entry.isIntersecting) {
+          setIsMenuOpen(true);
+          setWasHide(false);
+        } else if (!wasHide && !entry.isIntersecting && isMenuOpen) {
+          setIsMenuOpen(false);
+          setWasHide(true);
+        }
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+      }
+    );
+
+    const currentMenuRef = menuRef.current;
+    if (currentMenuRef) {
+      observer.observe(currentMenuRef);
+    }
+
+    return () => {
+      if (currentMenuRef) {
+        observer.unobserve(currentMenuRef);
+      }
+    };
+  }, [isMenuOpen, wasHide]);
 
   useEffect(() => {
     document.addEventListener('contextmenu', showContextMenu);
@@ -94,6 +127,11 @@ const App: FC = () => {
       document.removeEventListener('click', hideMenu);
     };
   }, []);
+
+  useEffect(() => {
+    console.log('isMenuOpen', isMenuOpen);
+    console.log('wasHide', wasHide)
+  }, [isMenuOpen, wasHide]);
 
   return (
     <div className={appStyles.container}>
