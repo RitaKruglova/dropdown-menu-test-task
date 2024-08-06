@@ -1,11 +1,6 @@
 import { FC } from 'react';
 import menuItemStyles from './menu-item.module.css';
-
-interface IMenuItemProps {
-  text: string;
-  iconPath: string;
-  alt: string;
-}
+import { IMenuItemProps } from '../../utils/types';
 
 const MenuItem: FC<IMenuItemProps> = ({ text, iconPath, alt }) => {
   function handleClick(): void {

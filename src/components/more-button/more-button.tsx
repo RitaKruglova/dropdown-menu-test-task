@@ -1,10 +1,7 @@
 import React, { forwardRef } from 'react';
 import moreButtonStyles from './more-button.module.css';
 import moreIconPath from '../../images/more.svg';
-
-interface IMoreButtonProps {
-  handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-}
+import { IMoreButtonProps } from '../../utils/types';
 
 const MoreButton = forwardRef<HTMLButtonElement, IMoreButtonProps>(({ handleClick }, ref) => {
   return (

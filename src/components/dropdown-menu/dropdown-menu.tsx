@@ -1,12 +1,8 @@
-import { CSSProperties, ReactNode, forwardRef } from 'react';
+import { forwardRef } from 'react';
 import dropdownMenuStyles from './dropdown-menu.module.css';
-import { TMenuPosition } from '../../utils/types';
+import { IDropdownMenuProps } from '../../utils/types';
 
-interface IDropdownMenuProps {
-  children: ReactNode;
-  style?: CSSProperties;
-  menuPosition: TMenuPosition;
-}
+
 
 const DropdownMenu = forwardRef<HTMLUListElement, IDropdownMenuProps>(({ children, style, menuPosition }, ref) => {
   return (
