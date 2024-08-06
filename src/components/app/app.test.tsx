@@ -164,6 +164,12 @@ describe('App Component', () => {
       configurable: true,
       value: 50,
     });
+    Object.defineProperty(button, 'getBoundingClientRect', {
+      configurable: true,
+      value: () => ({
+        y: 920,
+      }),
+    });
     const menu = document.querySelector('ul[role="menu"]');
     if (menu) {
       Object.defineProperty(menu, 'offsetHeight', {
@@ -209,6 +215,12 @@ describe('App Component', () => {
     Object.defineProperty(button, 'offsetHeight', {
       configurable: true,
       value: 50,
+    });
+    Object.defineProperty(button, 'getBoundingClientRect', {
+      configurable: true,
+      value: () => ({
+        y: 900,
+      }),
     });
     const menu = document.querySelector('ul[role="menu"]');
     if (menu) {
